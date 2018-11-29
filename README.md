@@ -1,3 +1,6 @@
+# URL
+http://localhost/PlastyWood/site/index.php
+
 # User class
 This class can register and login users in a database with PDO. It can:
 
