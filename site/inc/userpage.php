@@ -11,7 +11,26 @@
 <body>
 
 <div class="container">
-  <h2>Welcome <?php print $_SESSION['user']['fname'].' '.$_SESSION['user']['lname']; ?></h2>           
+
+
+    <div class="body_padded">
+        <h1>Vulnerability: File Upload</h1>
+
+        <div class="vulnerable_code_area">
+            <form enctype="multipart/form-data" action="upload.php" method="POST">
+                <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                <p>Choose an image to upload:</p>
+                <input name="uploaded" type="file" /><br /><br />
+
+                <input type="submit" name="Upload" value="Upload" />
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <h2>Welcome <?php print $_SESSION['user']['fname'].' '.$_SESSION['user']['lname']; ?></h2>
   <table class="table table-striped">
     <thead>
       <tr>

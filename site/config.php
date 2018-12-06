@@ -1,6 +1,6 @@
 <?php
 session_start();
-define('conString', 'mysql:host=localhost;dbname=login_db');
+define('conString', 'mysql:host=localhost;dbname=db_plastywood');
 define('dbUser', 'root');
 define('dbPass', '');
 
