@@ -119,6 +119,17 @@ class User{
         }
     }
 
+    public function uploadImage($name, $image, $userID) {
+        $pdo = $this->pdo;
+        $stmt = $pdo->prepare('INSERT INTO images (name, image, userID) VALUES (?, ?, ?)');
+        if($stmt->execute([$name, $image, $userID])){
+            return true;
+        }else{
+            $this->msg = 'Inesrting a new image failed.';
+            return false;
+        }
+    }
+
     /**
     * Email the confirmation code function
     * @param string $email User email.
