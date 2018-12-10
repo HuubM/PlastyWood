@@ -29,6 +29,7 @@
                     <td><?= $user['fname'] ?></td>
                     <td><?= $user['lname'] ?></td>
                     <td><?= $user['email'] ?></td>
+                    <td><?= $user['id'] ?></td>
                     <td>
                         <div>
                             <form enctype="multipart/form-data" action="upload.php" method="POST">
@@ -36,16 +37,16 @@
                                 <input type="hidden" name="user_id" value="<?= $user['id'] ?>" />
                                 <input name="uploaded" type="file" style="display:inline"/>
 
-                                <input type="submit" name="Upload" value="Upload" style="display:inline"/>
+                                <input type="submit" name="upload" value="Upload" style="display:inline"/>
                             </form>
                         </div>
                     </td>
                     <td>
                         <div>
                             <form enctype="multipart/form-data" action="download.php" method="POST">
-                                <input type="hidden" name="user_id" value="<?= $user['id']?>" />
+                                <input type="hidden" name="user_id" value="<?= $user['id'] ?>" />
 
-                                <input type="submit" name="Download" value="Show" style="display:inline"/>
+                                <input type="submit" name="download" value="Show" style="display:inline"/>
                             </form>
                         </div>
                     </td>

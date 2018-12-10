@@ -173,53 +173,41 @@ class User
         $pdo = $this->pdo;
         $stmt = $pdo->prepare('INSERT INTO images (name, image, userID) VALUES (?, ?, ?)');
         if ($this->checkImageNotInDB($name) && $stmt->execute([$name, $image, $userID])) {
-            echo '<pre>Success</pre>';
             return true;
         } else {
-            echo '<pre>Inserting a new image failed</pre>';
             return false;
         }
     }
 
-    public function getImages($userID) {
-        /** show image from 'images/' folder */
+/*    public function showImagesByUserIDPDO($userID) {
         $pdo = $this->pdo;
-        $stmt = $pdo->prepare('SELECT * from images WHERE userID = ?');
+        $stmt = $pdo->prepare('SELECT * from images WHERE userID = $?');
         if ($stmt->execute([$userID])) {
-            while($row = $stmt->fetch()){
-                echo ' <img height="300" width="300" src="images/'.$row['name'].' " /> ';
+            $query = $stmt->execute([$userID]);
+            $num = $pdo->fetchColumn();
+
+            for($i = 0; $i < $num; $i++) {
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+                $img = $result['image'];
+                echo '<img src="data:image;base64,'.$img.'">';
             }
         } else {
             return false;
         }
+    }*/
 
-/*      mysqli style - probably connection not good.
+    // Get images by user id
+    public function showImagesByUserID($userID) {
+        $con = mysqli_connect("localhost", "root", "", "db_plastywood");
+        $sql = "SELECT * from images WHERE userID = $userID";
+        $query = mysqli_query($con, $sql);
+        $num = mysqli_num_rows($query);
 
-        TODO: use parameterized userID. It is now set to 1 for testing purposes
-        $db = mysqli_connect("localhost","root","","db_plastywood");
-        debug_to_console($db);
-        $sql = "SELECT image FROM images WHERE userID = 1";
-        debug_to_console($sql);
-        $sth = $db->query($sql);
-        debug_to_console($sth);
-        $result=mysqli_fetch_array($sth);
-        debug_to_console($result);
-        echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
-*/
-
-/*      PDO style - not working
-
-        $pdo = $this->pdo;
-        $stmt = $pdo->prepare('SELECT image from images WHERE userID = ?');
-
-        if ($stmt->execute([$userID])) {
-            $file = null;
-            $stmt->bindColumn(3, $file, PDO::PARAM_LOB);
-            $stmt->fetch();
-            header('Content-type: image/jpeg');
-            echo $file;
+        for($i = 0; $i < $num; $i++) {
+            $result = mysqli_fetch_array($query);
+            $img = $result['image'];
+            echo '<img src="data:image;base64,'.$img.'">';
         }
-*/
     }
 
     /**

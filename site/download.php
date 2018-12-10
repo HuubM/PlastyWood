@@ -3,9 +3,6 @@
 require_once '../class/user.php';
 require_once 'config.php';
 
-// debugger:
-// $user->debug_to_console($uploaded_type);
-
-if (isset($_POST['Download'])) {
-    $user->getImages($_POST['user_id']);
+if (isset($_POST['download'])) {
+    $user->showImagesByUserID($_POST['user_id']);
 }
