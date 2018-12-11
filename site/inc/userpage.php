@@ -33,9 +33,9 @@
                     <td>
                         <div>
                             <form enctype="multipart/form-data" action="upload.php" method="POST">
-                                <input type="hidden" name="MAX_FILE_SIZE" value="100000"/>
+                                <input type="hidden" name="MAX_FILE_SIZE" />
                                 <input type="hidden" name="user_id" value="<?= $user['id'] ?>" />
-                                <input name="uploaded" type="file" style="display:inline"/>
+                                <input type="file" name="uploaded" id="uploaded" style="display:inline"/>
 
                                 <input type="submit" name="upload" value="Upload" style="display:inline"/>
                             </form>
