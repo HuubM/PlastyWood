@@ -23,5 +23,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// disable XML external entity loading explicitly
+$previous = libxml_disable_entity_loader(true);
+// and restore XML external entity loading on exit
+register_shutdown_function('libxml_disable_entity_loader', $previous);
+
 $user = new User();
 $user->dbConnect(conString, dbUser, dbPass);
