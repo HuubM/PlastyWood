@@ -178,36 +178,18 @@ class User
             return false;
         }
     }
+    
+public function showImagesByUserID($userID) {
 
-/*    public function showImagesByUserIDPDO($userID) {
-        $pdo = $this->pdo;
-        $stmt = $pdo->prepare('SELECT * from images WHERE userID = $?');
-        if ($stmt->execute([$userID])) {
-            $query = $stmt->execute([$userID]);
-            $num = $pdo->fetchColumn();
-
-            for($i = 0; $i < $num; $i++) {
-                $result = $query->fetch(PDO::FETCH_ASSOC);
-                $img = $result['image'];
-                echo '<img src="data:image;base64,'.$img.'">';
-            }
-        } else {
-            return false;
+    $pdo = $this->pdo;    
+    $stmt = $pdo->prepare('SELECT image FROM images WHERE userID = ?');    
+    $stmt->execute([$userID]);    
+    $waardes = $stmt->fetchAll();  
+    foreach ($waardes as $value){    
+        $img = $value['image'];    
+        echo '<img src="data:image;base64,'.$img.'">';    
         }
-    }*/
-
-    // Get images by user id
-    public function showImagesByUserID($userID) {
-        $con = mysqli_connect("localhost", "root", "", "db_plastywood");
-        $sql = "SELECT * from images WHERE userID = $userID";
-        $query = mysqli_query($con, $sql);
-        $num = mysqli_num_rows($query);
-
-        for($i = 0; $i < $num; $i++) {
-            $result = mysqli_fetch_array($query);
-            $img = $result['image'];
-            echo '<img src="data:image;base64,'.$img.'">';
-        }
+    
     }
 
     /**
