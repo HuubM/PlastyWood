@@ -179,18 +179,18 @@ class User
         }
     }
     
-public function showImagesByUserID($userID) {
+    public function showImagesByUserID($userID) {
 
-    $pdo = $this->pdo;    
-    $stmt = $pdo->prepare('SELECT image FROM images WHERE userID = ?');    
-    $stmt->execute([$userID]);    
-    $waardes = $stmt->fetchAll();  
-    foreach ($waardes as $value){    
-        $img = $value['image'];    
-        echo '<img src="data:image;base64,'.$img.'">';    
+        $pdo = $this->pdo;    
+        $stmt = $pdo->prepare('SELECT image FROM images WHERE userID = ?');    
+        $stmt->execute([$userID]);    
+        $waardes = $stmt->fetchAll();  
+        foreach ($waardes as $value){    
+            $img = $value['image'];    
+            echo '<img src="data:image;base64,'.$img.'">';    
+            }
+        
         }
-    
-    }
 
     /**
      * Email the confirmation code function
@@ -380,6 +380,8 @@ public function showImagesByUserID($userID) {
      */
     public function logout()
     {
+        session_unset();
+        session_destroy();
         $_SESSION['user'] = null;
         session_regenerate_id();
         return true;
