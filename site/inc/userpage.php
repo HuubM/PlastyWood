@@ -54,12 +54,21 @@
                 <?php
             }
         } else { ?>
-            <tr>
-                <td><?= $_SESSION['user']['fname'] ?></td>
-                <td><?= $_SESSION['user']['lname'] ?></td>
-                <td><?= $_SESSION['user']['email'] ?></td>
+            <tr>            
+                <td><?= $_SESSION['user']['fname'] ?></td>            
+                <td><?= $_SESSION['user']['lname'] ?></td>            
+                <td><?= $_SESSION['user']['email'] ?></td>            
+                <td>            
+                    <div>            
+                        <form enctype="multipart/form-data" action="download.php" method="POST">            
+                            <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id'] ?>" />            
+                            <input type="submit" name="download" value="Show" style="display:inline"/>            
+                        </form>            
+                    </div>            
+                </td>            
             </tr>
-        <?php } ?></tbody>
+            
+            <?php } ?></tbody>
     </table>
     <p><a href='logout.php'>Logout</a></p>
 </div>
