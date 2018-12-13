@@ -22,3 +22,14 @@ function validateEmail($email) {
 	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,})?$/;
   	return emailReg.test( $email );
 }
+
+function validatePassword($pwd) {
+	var emailReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  	return emailReg.test( $pwd );
+}
+
+function validateName($name) {
+	var emailReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  	return emailReg.test( $name );
+}
+
